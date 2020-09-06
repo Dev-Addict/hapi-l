@@ -12,12 +12,10 @@ export default class TaskController {
     }
 
     createTask(request: Request, h: ResponseToolkit) {
-        const taskDto = <TaskDto>JSON.parse(<string>request.payload);
-
         try {
             return h.response({
                 status: 'success',
-                data: createTask(taskDto)
+                data: createTask(<TaskDto>JSON.parse(<string>request.payload))
             }).code(201);
         } catch (err) {
             return h.response({
@@ -41,8 +39,18 @@ export default class TaskController {
         }
     }
 
-    updateTask(id: string, taskDto: TaskDto) {
-        return updateTask(id, taskDto)
+    updateTask(request: Request, h: ResponseToolkit) {
+        try {
+            return h.response({
+                status: 'success',
+                data: updateTask(request.params.id, <TaskDto>JSON.parse(<string>request.payload))
+            }).code(200);
+        } catch (err) {
+            return h.response({
+                status: 'fail',
+                message: 'not found'
+            }).code(400)
+        }
     }
 
     deleteTask(id: string) {

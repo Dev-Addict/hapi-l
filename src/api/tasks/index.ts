@@ -27,5 +27,13 @@ export const setRoutes = (server: Server): void => {
         options: {
             handler: taskController.getTask
         }
+    });
+
+    server.route({
+        method: 'PATCH',
+        path: '/tasks/{id}',
+        options: {
+            handler: taskController.updateTask
+        }
     })
 };

@@ -19,5 +19,13 @@ export const setRoutes = (server: Server): void => {
         options: {
             handler: taskController.createTask
         }
+    });
+
+    server.route({
+        method: 'GET',
+        path: '/tasks/{id}',
+        options: {
+            handler: taskController.getTask
+        }
     })
 };

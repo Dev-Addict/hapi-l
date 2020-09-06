@@ -27,8 +27,18 @@ export default class TaskController {
         }
     }
 
-    getTask(id: string) {
-        return getTask(id);
+    getTask(request: Request, h: ResponseToolkit) {
+        try {
+            return h.response({
+                status: 'success',
+                data: getTask(request.params.id)
+            }).code(200);
+        } catch (err) {
+            return h.response({
+                status: 'fail',
+                message: 'not found'
+            }).code(404);
+        }
     }
 
     updateTask(id: string, taskDto: TaskDto) {

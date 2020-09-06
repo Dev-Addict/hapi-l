@@ -13,8 +13,8 @@ export const createTask = (taskDto: TaskDto) => {
     return TasksST.getInstance().addTask(taskDto);
 };
 
-export const getTask = TasksST.getInstance().getTask;
+export const getTask = (id: string) => TasksST.getInstance().getTask(id);
 
-export const updateTask = TasksST.getInstance().updateTask;
+export const updateTask = (id: string, taskDto: TaskDto) =>  TasksST.getInstance().updateTask(id, taskDto);
 
-export const deleteTask = TasksST.getInstance().deleteTask;
+export const deleteTask = (id: string) => TasksST.getInstance().deleteTask(id);

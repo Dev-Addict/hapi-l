@@ -1,9 +1,14 @@
+import {ResponseToolkit, Request} from "hapi";
+
 import {createTask, getTasks, getTask, updateTask, deleteTask} from "./task-repository";
 import TaskDto from "./task-dto";
 
 export default class TaskController {
-    getTasks() {
-        return getTasks();
+    getTasks(request: Request, h: ResponseToolkit) {
+        return {
+            status: 'success',
+            data: getTasks()
+        };
     }
 
     createTask(taskDto: TaskDto) {

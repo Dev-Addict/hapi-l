@@ -1,6 +1,7 @@
 import path from 'path';
 import {config} from "dotenv";
 import {getServer} from './server';
+import {setRoutes} from "./api";
 
 config({
     path: path.join(__dirname, './config.env').replace('dist', 'src')
@@ -17,6 +18,8 @@ process.on("unhandledRejection", (reason: any) => {
 });
 
 const server = getServer();
+
+setRoutes(server);
 
 server.start().then( () =>
     console.log('server is running at %s', server.info.uri)

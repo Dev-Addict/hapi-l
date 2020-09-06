@@ -35,5 +35,13 @@ export const setRoutes = (server: Server): void => {
         options: {
             handler: taskController.updateTask
         }
-    })
+    });
+
+    server.route({
+        method: 'DELETE',
+        path: '/tasks/{id}',
+        options: {
+            handler: taskController.deleteTask
+        }
+    });
 };

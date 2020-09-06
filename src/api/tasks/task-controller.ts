@@ -53,7 +53,17 @@ export default class TaskController {
         }
     }
 
-    deleteTask(id: string) {
-        return deleteTask(id);
+    deleteTask(request: Request, h: ResponseToolkit) {
+        try {
+            return h.response({
+                status: 'success',
+                data: deleteTask(request.params.id)
+            }).code(200);
+        } catch (err) {
+            return h.response({
+                status: 'fail',
+                message: 'not found'
+            }).code(400);
+        }
     }
 }

@@ -11,5 +11,13 @@ export const setRoutes = (server: Server): void => {
         options: {
             handler: taskController.getTasks
         }
+    });
+
+    server.route({
+        method: 'POST',
+        path: '/tasks',
+        options: {
+            handler: taskController.createTask
+        }
     })
 };

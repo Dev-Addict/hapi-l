@@ -1,18 +1,30 @@
-import {ResponseToolkit, Request} from "hapi";
+import {Request, ResponseToolkit} from "hapi";
 
-import {createTask, getTasks, getTask, updateTask, deleteTask} from "./task-repository";
+import {createTask, deleteTask, getTask, getTasks, updateTask} from "./task-repository";
 import TaskDto from "./task-dto";
 
 export default class TaskController {
     getTasks(request: Request, h: ResponseToolkit) {
-        return {
+        return h.response({
             status: 'success',
             data: getTasks()
-        };
+        }).code(200);
     }
 
-    createTask(taskDto: TaskDto) {
-        return createTask(taskDto);
+    createTask(request: Request, h: ResponseToolkit) {
+        const taskDto = <TaskDto>JSON.parse(<string>request.payload);
+
+        try {
+            return h.response({
+                status: 'success',
+                data: createTask(taskDto)
+            }).code(201);
+        } catch (err) {
+            return h.response({
+                status: 'fail',
+                message: 'invalid request body'
+            }).code(400);
+        }
     }
 
     getTask(id: string) {

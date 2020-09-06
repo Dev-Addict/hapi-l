@@ -1,0 +1,9 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/.gitignore
+.idea/dictionaries/
+.idea/hapi-l.iml
+.idea/misc.xml
+.idea/modules.xml
+dist/
+node_modules/
+package-lock.json

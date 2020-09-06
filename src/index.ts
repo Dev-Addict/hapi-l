@@ -1,6 +1,6 @@
 import path from 'path';
 import {config} from "dotenv";
-import {init as initServer} from './server';
+import {getServer} from './server';
 
 config({
     path: path.join(__dirname, './config.env').replace('dist', 'src')
@@ -16,7 +16,8 @@ process.on("unhandledRejection", (reason: any) => {
     console.error(`unhandledRejection ${reason}`);
 });
 
-initServer().catch(err => {
-    console.log('Error while initializing server:', err);
-    throw err;
-});
+const server = getServer();
+
+server.start().then( () =>
+    console.log('server is running at %s', server.info.uri)
+);

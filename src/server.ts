@@ -1,9 +1,9 @@
 import {Server} from 'hapi';
 
-const init = async (): Promise<Server> => {
+export const init = async (): Promise<Server> => {
     try {
         const server: Server = new Server({
-            port: 3000,
+            port: process.env.PORT || 3000,
             host: '127.0.0.1'
         });
 
